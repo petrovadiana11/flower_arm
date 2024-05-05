@@ -1,0 +1,22 @@
+{% extends "mywork/arm/base_arm.html" %}
+{% load static %}
+{% block title %}<title>Детали заказа</title>{% endblock %}
+{% block namestr %} <h>Детали заказа</h> {% endblock %}
+{% block content %}
+<div id="conten" class="content">
+    <div class="detal_order">
+        <p>Код заказа:<a> {{order.shop_code}}</a></p>
+        <p>Получатель заказа:<a> {{order.name}}</a></p>
+        <p>Адрес заказа:<a> {{order.adres}}</a></p>
+        <p>Номер заказа:<a> {{order.number}}</a></p>
+        <p>Название товара:<a> {{order.product.name}}</a></p>
+        <p>Дата заказа:<a> {{order.published}}</a></p>
+        <p>Предпочитаемое время доставки:<a> {{order.date_of_receipt}}</a></p>
+        <p>Дополнительная информация:<a> {{order.message}}</a></p>
+    </div>
+    <div class="detal_img">
+        <img src="{{order.product.cover.url}}">
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+        <h4 class="korzina-text">Корзина</h4>
+     <div class="korzina_user">
+        <div class="container text-center">
+            <div class="row align-items-start">
+              <div class="col-auto">
+                <img class="img-korzina mt-3" src="img/rose.jpg">
+              </div>
+              <div class="col mt-3">
+                <h5>Товар</h5>
+                <div class="p mt-5">Букет из 50 ромашек и гипсофил</div>
+              </div>
+              <div class="col mt-3">
+                <h5>Количество</h5>
+                <div class="p mt-5">1</div>
+              </div>
+              <div class="col mt-3">
+                <h5>Цена</h5>
+                <div class="p mt-5">5000 руб.</div>
+              </div>
+              <div class="col-2 mt-4">
+                <div class="p-del mt-5">Удалить из корзины</div>
+              </div>
+            </div>
+          </div>
+     </div>
+     <a href="{% url 'oformlenie_shop' %}"><button class="korzina-button mt-4" type="button">Перейти к оформлению</button></a>
+  {% endblock %}

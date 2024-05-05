@@ -1,0 +1,60 @@
+{% extends "mywork/arm/base_arm.html" %}
+{% load static %}
+{% load active_link_tags %}
+{% block title %}<title>Заказы</title>{% endblock %}
+{% block namestr %} <h>Заказы</h> {% endblock %}
+{% block content %}
+<div class="content" id="content_order">
+    <p>Чтобы увидеть более подробную информацию о заказе перейдите по номеру заказа</p>
+            <div class="but-n " id="but-n" >
+                <li><a href="{% url 'order' %}">Текущие</a></li>
+            </div>
+            <div class="but-n ">
+                <li><a href="{% url 'order_history' %}">Завершенные</a></li>
+            </div>
+        </div>
+        <div class="order_info">
+            <div class="order_info_btn">
+                <p>Номер заказа</p>
+            </div>
+            <div class="order_info_btn">
+                <p>Код товара</p>
+            </div>
+            <div class="order_info_btn">
+                <p>Цена</p>
+            </div>
+            <div class="order_info_btn">
+                <p>Получатель</p>
+            </div>
+            <div class="order_info_btn">
+                <p>Дата заказа</p>
+            </div>
+            <div class="order_info_btn">
+                <p>Итого</p>
+            </div>
+        </div>
+{% for order in order_list %}
+        <div class="orders">
+            <div class="order_info_btn">
+                <a href="{{ order.get_absolute_path }}">
+                <p>{{order.shop_code}}</p></a>
+            </div>
+            <div class="order_info_btn">
+                <p class="code_product">{{order.product.kod_product}}</p>
+            </div>
+            <div class="order_info_btn">
+                <p>{{order.product.price}} руб</p>
+            </div>
+            <div class="order_info_btn">
+                <p>{{order.name}}</p>
+            </div>
+            <div class="order_info_btn">
+                <p>{{order.published}}</p>
+            </div>
+            <div class="order_info_btn">
+                <a href="{% url 'order_status' order.id %}"><button type="submit">Статус</button></a>
+                <a href="{% url 'delete_order' order.id %}"><button type="button">Удалить</button></a>
+            </div>
+        </div>
+            {% endfor %}
+{% endblock %}

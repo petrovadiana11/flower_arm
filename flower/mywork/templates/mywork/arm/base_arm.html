@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+    {% block title %}<title>Главная</title>{% endblock %}
+</head>
+<body>
+{% block header %}
+    <header>
+        <div class="logo">
+           <a href="{% url 'index' %}"><img src="{% static 'img/logo.png' %}"></a>
+        </div>
+        <div class="menu" id="menu-act">
+            <li><a href="{% url 'main_arm' %}">Главная</a></li>
+            <li><a href="{% url 'product' %}">Товары</a></li>
+            <li><a href="{% url 'order' %}">Заказы</a></li>
+            <li><a href="{% url 'teh_pod' %}">Поддержка</a></li>
+        </div>
+        <div id="vhod" class="exit">
+            <a href="{% url 'login' %}" >Выход</a>
+                <img src="{% static 'img/exit.png' %}">
+        </div>
+    </header>
+{% endblock %}
+    <article>
+        <div class="head_str">
+            <div class="name_str">
+                {% block namestr %} <h>Главная</h> {% endblock %}
+            </div>
+            <div id="user_name" class="user_name">
+                {% if user.is_authenticated %}
+                <a href="{% url 'index' %}"><p>{{user.username}}</p>
+                <img src="{% static 'img/user.png' %}"></a>
+                {% endif %}
+            </div>
+        </div>
+        {% block content %}
+        <div class="content">
+            <div class="hello_text">
+                <h>Добро пожаловать на рабочее место "boutique de fleurs" <br>
+                {{ user.username }} !</h>
+            </div>
+            <div class="shop_product_info">
+                <div class="info_products">
+                    <img src="{% static 'img/products.png'%}">
+                    <p>количество товаров<br><pre></pre>
+                    <b>{{num_product}}</b></p>
+                </div>
+                <div class="info_products">
+                    <img src="{% static 'img/categories.png'%}">
+                    <p>количество категорий товара<br><pre></pre>
+                    <b>{{num_category}}</b></p>
+                </div>
+                <div class="info_products">
+                    <img src="{% static 'img/orders.png'%}">
+                    <p>новые заказы<br><pre></pre>
+                    <b>{{num_order}}</b></p>
+                </div>
+                <div class="info_products">
+                    <img src="{% static 'img/users.png'%}">
+                    <p>количество пользователей<br><pre></pre>
+                    <b>{{num_user}}</b></p>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+    </article>
+    <script src="https://yastatic.net/jquery/3.3.1/jquery.min.js"></script>
+    <script async src="{% static 'js/script.js'%}"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+        <div class="o-nas">
+            <h4 class="korzina-text">О нас</h4>
+           <p>Интернет-магазин bountique de fleurs выполняет доставку цветов во все населенные пункты России. Наши специалисты тщательно следят, чтобы все букеты были такими же красивыми, как на фото в каталоге. При этом наши клиенты могут купить готовые букеты или цветочные композиции, а также заказать создание букета опытному флористу по индивидуальным пожеланиям.</p>
+
+           <p>Компания Flo-allo работает круглосуточно, предлагая широкий ассортимент букетов и подарков для любого праздника и по любому поводу. Благодаря нашему качественному и недорогому сервису вы можете порадовать близкого человека красивыми цветами в любой момент.</p>
+            
+           <p>Мы делаем все, чтобы заказ доставки цветов у нас был максимально доступным и удобным. Оформить заказ вы можете, добавив понравившийся букет в корзину нашего интернет-магазина, либо связавшись с нами по телефону или через сообщения в чате на сайте. Оплата заказа также возможна несколькими разными способами.</p>
+            
+           <p>Большое внимание мы уделяем и разнообразию предлагаемого ассортимента. Поэтому у нас можно заказать доставку роз, тюльпанов, лилий и многих других цветов, а также фруктовых корзин, сладостей и других подарков, отлично сочетающихся с цветочными композициями.</p>
+           <h4 class="korzina-text">Контакты</h4>
+           <p>Возникли вопросы ?<br>
+           Звоните по номеру: <strong>8 999 777 66 44</strong><br>
+           Наша почта: <strong >boutiquedefleurs@mail.ru</strong ></p>
+           <p>Проблемы на сайте, обращаться:<strong> 8 999 000 66 88</strong></p>
+           <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Оставить сообщение</button>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Оставить сообщение</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <div class="mb-3">
+                    <label for="recipient-name" class="col-form-label">Отправитель:</label>
+                    <input type="text" class="form-control" id="recipient-name">
+                  </div>
+                  <div class="mb-3">
+                    <label for="message-text" class="col-form-label">Сообщение:</label>
+                    <textarea class="form-control" id="message-text"></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn">Отправить</button>
+              </div>
+            </div>
+          </div>
+        </div>
+{% endblock %}

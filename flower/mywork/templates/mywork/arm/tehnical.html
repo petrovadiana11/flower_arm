@@ -1,0 +1,16 @@
+{% extends "mywork/arm/base_arm.html" %}
+{% load static %}
+{% block title %}<title>Поддержка</title>{% endblock %}
+{% block namestr %} <h>Техническая поддержка</h> {% endblock %}
+{% block content %}
+        <div class="content">
+            <div class="help">
+                <img src="{% static 'img/tehnical.png'%}"><br><pre></pre>
+                     <h>Возникли проблемы ? <br>
+                     Мы Вам поможем</h>
+                    <p>Номер горячей линии:<b> 7 999 000 88 44</b></p>
+                    <p>Наш email:<b> teh_podder@mail.ru</b></p>
+                    <a href="{% url 'send_help'%}">Оставить обращение</a>
+            </div>
+        </div>
+{% endblock %}

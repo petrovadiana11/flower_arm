@@ -1,0 +1,17 @@
+{% extends "mywork/arm/base_arm.html" %}
+{% load static %}
+{% block title %}<title>Поддержка</title>{% endblock %}
+{% block namestr %} <h>Техническая поддержка</h> {% endblock %}
+{% block content %}
+        <div class="content">
+            <div class="help">
+                <img src="{% static 'img/tehnical.png'%}"><br><pre></pre>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                <button type="submit">Отправить</button>
+                <p>После отправки обращения, в течение короткого времени по номеру телефона с вами свяжется сотрудник</p>
+                </form>
+            </div>
+        </div>
+{% endblock %}

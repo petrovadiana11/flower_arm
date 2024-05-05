@@ -1,0 +1,34 @@
+{% extends "mywork/arm/base_arm.html" %}
+{% load static %}
+{% block title %}<title>Главная</title>{% endblock %}
+{% block namestr %} <h>Главная</h> {% endblock %}
+        {% block content %}
+        <div class="content">
+            <div class="hello_text">
+                <h>Добро пожаловать на рабочее место "boutique de fleurs" <br>
+                {{ user.username }} !</h>
+            </div>
+            <div class="shop_product_info">
+                <div class="info_products">
+                    <img src="{% static 'img/products.png'%}">
+                    <p>количество товаров<br><pre></pre>
+                    <b>{{num_product}}</b></p>
+                </div>
+                <div class="info_products">
+                    <img src="{% static 'img/categories.png'%}">
+                    <p>количество категорий товара<br><pre></pre>
+                    <b>{{num_category}}</b></p>
+                </div>
+                <div class="info_products">
+                    <img src="{% static 'img/orders.png'%}">
+                    <p>новые заказы<br><pre></pre>
+                    <b>{{num_order}}</b></p>
+                </div>
+                <div class="info_products">
+                    <img src="{% static 'img/users.png'%}">
+                    <p>количество пользователей<br><pre></pre>
+                    <b>{{num_user}}</b></p>
+                </div>
+            </div>
+        </div>
+        {% endblock %}

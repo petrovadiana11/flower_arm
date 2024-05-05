@@ -1,0 +1,19 @@
+{% extends "mywork/arm/base_arm.html" %}
+{% load static %}
+{% block title %}<title>Добавить товар</title>{% endblock %}
+{% block namestr %}<h>Добавить товар</h>{% endblock %}
+{% block content %}
+        <div id="conten" class="content">
+            <form method = "post"  enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" >Сохранить</button>
+            </form>
+            <div class="img1">
+                <img src="{% static 'img/cloud.png' %}">
+            </div>
+            <div class="img2">
+                <img src="{% static 'img/flower3.png' %}">
+            </div>
+        </div>
+{% endblock %}
