@@ -13,32 +13,34 @@ from django.views.generic import ListView
 
 # Create your views here.
 def index(request):
-    return render(request, "index.html")
+    product = Product.objects.all()
+    return render(request, "index.html", context={'product': product},)
 
-def product_info(request):
-    return render(request, "mywork/shop/product_info.html")
+
+class ProductDetailView(generic.DetailView):
+    model = Product
 
 def korzina_shop(request):
-    return render(request, "mywork/shop/korzina_shop.html")
+    return render(request, "mywork/korzina_shop.html")
 
 def oformlenie_shop(request):
-    return render(request, "mywork/shop/oformlenie_shop.html")
+    return render(request, "mywork/oformlenie_shop.html")
 
 def thanks_delivery(request):
-    return render(request, "mywork/shop/thanks_delivery.html")
+    return render(request, "mywork/thanks_delivery.html")
 
 def profil(request):
-    return render(request, "mywork/shop/profil.html")
+    return render(request, "mywork/profil.html")
 
 def o_nas(request):
-    return render(request, "mywork/shop/o_nas.html")
+    return render(request, "mywork/o_nas.html")
 
 def main_arm(request):
     num_product = Product.objects.all().count()
     num_order = Order.objects.filter(active="False").count()
     num_category = Category.objects.all().count()
     num_user = User.objects.all().count()
-    return render(request, "mywork/arm/main_arm.html",context={'num_product': num_product,
+    return render(request, "mywork/main_arm.html",context={'num_product': num_product,
                            'num_order': num_order,
                             'num_user': num_user,
                             'num_category': num_category},)
@@ -52,8 +54,9 @@ class FilterProduct(ListView, CategorySearch):
         queryset = Product.objects.filter(category__in = self.request.GET.getlist("category"))
         return queryset
 
+
+
 class ProductListView(generic.ListView, CategorySearch):
-    template_name = 'mywork/arm/product_list.html'
     model = Product
 
 class Search(ListView):
@@ -78,7 +81,7 @@ def update_product(request, pk):
             form.save()
             return redirect(reverse('product'))
 
-    template = 'mywork/arm/add_product.html'
+    template = 'mywork/add_product.html'
     context = {
         'get_product': get_product,
         'update': True,
@@ -96,11 +99,11 @@ class OrderListView(generic.ListView):
 
     def get(self, request):
         order_list = Order.objects.filter(active="False")
-        return render(request, 'mywork/arm/order_list.html', {'order_list': order_list})
+        return render(request, 'mywork/order_list.html', {'order_list': order_list})
 
 def order_history(request):
     order_list = Order.objects.filter(active="True")
-    return render(request, 'mywork/arm/order_list.html', {'order_list': order_list})
+    return render(request, 'mywork/order_list.html', {'order_list': order_list})
 
 def order_status(request, pk):
     get_order = Order.objects.get(pk=pk)
@@ -110,7 +113,7 @@ def order_status(request, pk):
             form.save()
             return redirect(reverse('order'))
 
-    template = 'mywork/arm/edit.html'
+    template = 'mywork/edit.html'
     context = {
         'get_order': get_order,
         'update': True,
@@ -127,12 +130,12 @@ class OrderDetailView(generic.DetailView):
     model = Order
 
 class CategoryCreate(CreateView):
-    template_name = 'mywork/arm/add_category.html'
+    template_name = 'mywork/add_category.html'
     form_class = CategoryForm
     success_url = reverse_lazy('product')
 
 class ProductCreate(CreateView):
-    template_name = 'mywork/arm/add_product.html'
+    template_name = 'mywork/add_product.html'
     form_class = ProductForm
     success_url = reverse_lazy('product')
 
@@ -142,13 +145,13 @@ class RegisterUser(CreateView):
     success_url = reverse_lazy('login')
 
 class HelpCreate(CreateView):
-    template_name = 'mywork/arm/send_help.html'
+    template_name = 'mywork/send_help.html'
     form_class = HelpForm
     success_url = reverse_lazy('teh_pod')
 
 
 def teh_pod(request):
-    return render(request, "mywork/arm/tehnical.html")
+    return render(request, "mywork/tehnical.html")
 
 
 class UserLoginView(LoginView):

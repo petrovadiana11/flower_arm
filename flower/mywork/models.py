@@ -46,8 +46,8 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return f'/product/{self.id}'
+    def get_absolute_path(self):
+        return reverse('product-detail', args=[str(self.id)])
 
     class Meta:
         verbose_name_plural = "Товары"

@@ -5,11 +5,12 @@ from .views import index, ProductListView, teh_pod, ProductCreate, CategoryCreat
     password_reset_email, \
     password_reset_confirm, password_reset_complete, password_reset_form, RegisterUser, UserLoginView, HelpCreate, \
     OrderListView, Search, OrderDetailView, update_product, delete_product, order_history, order_status, delete_order, \
-    FilterProduct, main_arm, product_info, korzina_shop, oformlenie_shop, thanks_delivery, profil, o_nas
+    FilterProduct, main_arm, korzina_shop, oformlenie_shop, thanks_delivery, profil, o_nas, \
+    ProductDetailView
 
 urlpatterns = [
     path('', index, name='index'),
-    path('product_info', product_info, name='product_info'),
+    path(r'^product/(?P<pk>\d+)$', ProductDetailView.as_view(), name='product-detail'),
     path('korzina_shop', korzina_shop, name='korzina_shop'),
     path('oformlenie_shop', oformlenie_shop, name='oformlenie_shop'),
     path('thanks_delivery', thanks_delivery, name='thanks_delivery'),
