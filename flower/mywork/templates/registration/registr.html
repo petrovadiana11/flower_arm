@@ -1,23 +1,15 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
-    <title>Регистрация</title>
-</head>
-<body>
-    <div class="vhod">
-        <img src="{% static 'img/logo.png'%}">
+{% block content %}
+<div class="thanks-order text-center" >
         <form method="post">
             {% csrf_token %}
              {% for f in form %}
                 <p><label class="form-label" for="{{f.id_for_label}}">{{f.label}}: </label>{{f}}</p>
                 <div class="form-error">{{ f.errors }}</div>
              {% endfor %}
-            <button type="submit">Зарегистрироваться</button>
+            <button class="btn-korzina mt-3 w-50" type="submit" class="btn btn-primary" >Зарегистрироваться</button><br>
+            <a href="{% url 'login' %}">Назад</a><pre></pre>
         </form>
     </div>
-</body>
-</html>
+{% endblock %}

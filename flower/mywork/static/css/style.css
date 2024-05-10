@@ -432,38 +432,6 @@ a.active {
 .img2{
     margin-left: 10%;
 }
-.vhod{
-    width: 500px;
-    height: 600px;
-    background-color: #ffff;
-    border-radius: 10px;
-    border: 1px solid #CCBECC;
-    margin: auto;
-    margin-top: 12%;
-    text-align: center;
-}
-.vhod img{
-    width: 90px;
-    height: 100px;
-    margin-top: 20px;
-}
-.vhod input{
-    width: 300px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid #CCBECC;
-    margin-top: 10px;
-}
-.vhod button, .help button{
-    width: auto;
-    height: 40px;
-    border-radius: 10px;
-    border: 1px solid #CCBECC;
-    margin-top: 30px;
-    background: linear-gradient(90deg, #DAADF6 -6%, #F3D4F7 100%);
-    font-size: 20px;
-    cursor: pointer;
-}
 .help{
     width: 500px;
     height: 400px;
@@ -797,6 +765,16 @@ a.active {
     -webkit-box-shadow: 0px 4px 18px 3px rgba(34, 60, 80, 0.2);
     -moz-box-shadow: 0px 4px 18px 3px rgba(34, 60, 80, 0.2);
     box-shadow: 0px 4px 18px 3px rgba(34, 60, 80, 0.2);
+}
+.mb-3 input{
+    width: 80%;
+    height: 35px;
+    border-radius: 10px;
+}
+.mb-3 textarea{
+    width: 80%;
+    height: 95px;
+    border-radius: 10px;
 }
 .card-profil p{
     color:#595757;

@@ -1,7 +1,7 @@
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy, reverse
@@ -14,26 +14,48 @@ from django.views.generic import ListView
 # Create your views here.
 def index(request):
     product = Product.objects.all()
-    return render(request, "index.html", context={'product': product},)
+    category = Category.objects.all()
+    return render(request, "index.html", context={'product': product,
+                                                  'category': category}, )
 
-
+def filters(request):
+    category = Category.objects.all()
+    return render(request, "base.html", context={'category': category},)
 class ProductDetailView(generic.DetailView):
     model = Product
 
 def korzina_shop(request):
-    return render(request, "mywork/korzina_shop.html")
+    category = Category.objects.all()
+    return render(request, "mywork/korzina_shop.html", context={'category': category},)
 
 def oformlenie_shop(request):
-    return render(request, "mywork/oformlenie_shop.html")
+    category = Category.objects.all()
+    return render(request, "mywork/oformlenie_shop.html", context={'category': category},)
 
 def thanks_delivery(request):
-    return render(request, "mywork/thanks_delivery.html")
+    category = Category.objects.all()
+    return render(request, "mywork/thanks_delivery.html", context={'category': category},)
 
 def profil(request):
-    return render(request, "mywork/profil.html")
+    category = Category.objects.all()
+    return render(request, "mywork/profil.html", context={'category': category},)
 
 def o_nas(request):
-    return render(request, "mywork/o_nas.html")
+    category = Category.objects.all()
+    if request.method == 'POST':
+        form = HelpForm(request.POST)
+        if form.is_valid():
+            try:
+                form.save()
+                return redirect('../')
+            except:
+                print(form.cleaned_data)
+                form.add_error(None, 'ошибка')
+    else:
+        form = HelpForm()
+
+    return render(request, "mywork/o_nas.html", context={'category': category,
+                                                         'form': form},)
 
 def main_arm(request):
     num_product = Product.objects.all().count()
@@ -54,13 +76,10 @@ class FilterProduct(ListView, CategorySearch):
         queryset = Product.objects.filter(category__in = self.request.GET.getlist("category"))
         return queryset
 
-
-
 class ProductListView(generic.ListView, CategorySearch):
     model = Product
 
 class Search(ListView):
-
     def get_queryset(self):
         try:
             return Product.objects.filter(name__icontains=self.request.GET.get("q"))
@@ -157,6 +176,8 @@ def teh_pod(request):
 class UserLoginView(LoginView):
     template_name = 'registration/login.html'
 
+class UserLogoutView(LogoutView):
+    template_name = 'registration/logout.html'
 
 
 def password_reset_form(request):

@@ -17,7 +17,7 @@
                 <a href="{% url 'index' %}"><h>boutique de fleurs</h></a>
               </div>
               <div class="col-6 " id="search-main">
-                      <form method="get" action="{% url 'poisk' %}" class="d-flex " role="search">
+                      <form method="get" action="" class="d-flex " role="search">
                         <input name="w" class="form-search  border-0" type="search"  placeholder="Найти товары" aria-label="Search">
                         <button class="btn " type="submit"><img src="{% static 'img/icon.png' %}"></button>
                       </form>
@@ -32,13 +32,14 @@
                               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
+                              <form action="{% url 'filters' %}" method="get">
                               <ul>
-                                <li><a href="">Букеты</a></li>
-                                <li><a href="">Корзины</a></li>
-                                <li><a href="">Живые цветы</a></li>
-                                <li><a href="">Открытки</a></li>
-                                <li><a href="">Сладости</a></li>
+                                {% for category in category %}
+                                  <li><input type="checkbox" name="category" value="{{category.id}}">
+                                    <a>{{ category.name }}</a></li>
+                                {% endfor %}
                               </ul>
+                                </form>
                             </div>
                             <div class="offcanvas-title">
                             <h4>Фильтры</h4>

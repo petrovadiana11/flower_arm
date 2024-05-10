@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+{% if user.is_authenticated %}
           <div class="modal fade" id="staticBackd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
@@ -24,11 +25,11 @@
         <div class="row align-items-start">
           <div class="col">
             <div class="card-profil" >
-                <p>Имя пользователя: Петрова Диана</p>
+                <p>Имя пользователя: {{user.username}}</p>
                 <p>Email: petrovadi123@mail.ru</p>
                 <p>Номер телефона: 8 999 000 66 55</p>
                 <a href="#" ><button class="btn-korzina mt-3" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Изменить</button></a>
-                <a href="#" ><button class="btn-korzina mt-3" type="button">Выйти</button></a>
+                <a href="{% url 'logout' %}" ><button class="btn-korzina mt-3" type="button">Выйти</button></a>
             </div>
           </div>
           <div class="col">
@@ -57,16 +58,15 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn " data-bs-dismiss="modal">Закрыть</button>
-                 
                 </div>
               </div>
             </div>
           </div>
           <div class="col">
             <div class="card-profil" >
-                <div class="container text-center">
+                 <a href="{% url 'korzina_shop' %}"><div class="container text-center">
                     <div class="row align-items-center">
-                      <div class="col-4 text-end mt-5">
+                     <div class="col-4 text-end mt-5">
                         <img src="{% static 'img/korzina-profil .png' %}">
                       </div>
                       <div class="col text-start mt-5">
@@ -74,9 +74,16 @@
                       </div>
                     </div>
                   </div>
+                     </a>
             </div>
           </div>
          
         </div>
       </div>
+{% else %}
+    <div class="thanks-order text-center" >
+        <img src="{% static 'img/thanks-order.png' %}">
+        <a href="{% url 'login' %}"><h4>Войти в профиль</h4></a>
+      </div>
+{% endif %}
 {% endblock %}

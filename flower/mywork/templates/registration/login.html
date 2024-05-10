@@ -1,23 +1,14 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 {% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
-    <title>Вход для продавцов</title>
-</head>
-<body>
-    <div class="vhod">
-        <img src="{% static 'img/logo.png' %}">
+{% block content %}
+<div class="thanks-order text-center" >
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
             <input type="hidden" name="next " value=" {{ next }} ">
-            <button type="submit">Войти в аккаунт</button><br><pre></pre>
+            <button class="btn-korzina mt-3 w-50" type="submit" class="btn btn-primary" >Войти в аккаунт</button><br>
             <a href="{% url 'user_register' %}">Нет аккаунта? Зарегистрироваться</a><pre></pre>
 
         </form>
-    </div>
-</body>
-</html>
+</div>
+{% endblock %}

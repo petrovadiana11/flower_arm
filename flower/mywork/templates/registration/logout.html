@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="thanks-order text-center" >
+        <img src="{% static 'img/thanks-order.png' %}">
+        <h4>Вы вышли с профиля</h4>
+        <a href="{% url 'login' %}"><h5>Войти</h5></a>
+      </div>
+{% endblock %}

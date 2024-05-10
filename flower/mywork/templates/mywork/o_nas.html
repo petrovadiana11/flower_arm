@@ -25,19 +25,24 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form>
+                <form method="post">
+                    {% csrf_token %}
                   <div class="mb-3">
-                    <label for="recipient-name" class="col-form-label">Отправитель:</label>
-                    <input type="text" class="form-control" id="recipient-name">
+                    <label class="col-form-label">Отправитель:</label><br>
+                      {{form.name}}
+                  </div>
+                    <div class="mb-3">
+                    <label class="col-form-label">Номер:</label><br>
+                      {{form.number}}
                   </div>
                   <div class="mb-3">
-                    <label for="message-text" class="col-form-label">Сообщение:</label>
-                    <textarea class="form-control" id="message-text"></textarea>
+                    <label class="col-form-label">Сообщение:</label><br>
+                      {{form.message}}
                   </div>
-                </form>
+                    <div class="modal-footer">
+                <button type="submit" class="btn">Отправить</button>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn">Отправить</button>
+                </form>
               </div>
             </div>
           </div>

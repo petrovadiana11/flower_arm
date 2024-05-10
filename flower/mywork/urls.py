@@ -6,10 +6,11 @@ from .views import index, ProductListView, teh_pod, ProductCreate, CategoryCreat
     password_reset_confirm, password_reset_complete, password_reset_form, RegisterUser, UserLoginView, HelpCreate, \
     OrderListView, Search, OrderDetailView, update_product, delete_product, order_history, order_status, delete_order, \
     FilterProduct, main_arm, korzina_shop, oformlenie_shop, thanks_delivery, profil, o_nas, \
-    ProductDetailView
+    ProductDetailView, filters, UserLogoutView
 
 urlpatterns = [
     path('', index, name='index'),
+    path('filters/', filters, name='filters'),
     path(r'^product/(?P<pk>\d+)$', ProductDetailView.as_view(), name='product-detail'),
     path('korzina_shop', korzina_shop, name='korzina_shop'),
     path('oformlenie_shop', oformlenie_shop, name='oformlenie_shop'),
@@ -38,7 +39,7 @@ urlpatterns = [
     path('password/reset/confirm/', password_reset_confirm, name='password_reset_confirm'),
     path('password/reset/complete/', password_reset_complete, name='password_reset_complete'),
     path('login/', UserLoginView.as_view(), name='login'),
-    path('accounts/logout/', LogoutView.as_view(), name='logout'),
+    path('logout/', UserLogoutView.as_view(), name='logout'),
 
 
 

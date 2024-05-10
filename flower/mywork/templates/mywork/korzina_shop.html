@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
+{% if user.is_authenticated %}
         <h4 class="korzina-text">Корзина</h4>
      <div class="korzina_user">
         <div class="container text-center">
@@ -27,4 +28,10 @@
           </div>
      </div>
      <a href="{% url 'oformlenie_shop' %}"><button class="korzina-button mt-4" type="button">Перейти к оформлению</button></a>
+{% else %}
+    <div class="thanks-order text-center" >
+        <img src="{% static 'img/thanks-order.png' %}">
+        <a href="{% url 'login' %}"><h4>Войти в профиль</h4></a>
+      </div>
+{% endif %}
   {% endblock %}
