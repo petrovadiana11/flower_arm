@@ -9,20 +9,23 @@ from django.views import generic
 from .forms import ProductForm, CategoryForm, HelpForm, OrderForm
 from .models import Product, Order, Category
 from django.views.generic import ListView
+from django.http import HttpResponseRedirect
 
 
 # Create your views here.
-def index(request):
-    product = Product.objects.all()
-    category = Category.objects.all()
-    return render(request, "index.html", context={'product': product,
-                                                  'category': category}, )
 
-def filters(request):
-    category = Category.objects.all()
-    return render(request, "base.html", context={'category': category},)
 class ProductDetailView(generic.DetailView):
+    category = Category.objects.all()
     model = Product
+
+def add_product(request, pk):
+    get_product = Product.objects.get(pk=pk)
+    template = "mywork/product_detail"
+    context = {
+        'get_product': get_product,
+    }
+    return render(request, template, context)
+
 
 def korzina_shop(request):
     category = Category.objects.all()
@@ -53,7 +56,6 @@ def o_nas(request):
                 form.add_error(None, 'ошибка')
     else:
         form = HelpForm()
-
     return render(request, "mywork/o_nas.html", context={'category': category,
                                                          'form': form},)
 
@@ -73,25 +75,22 @@ class CategorySearch:
 
 class FilterProduct(ListView, CategorySearch):
     def get_queryset(self):
-        queryset = Product.objects.filter(category__in = self.request.GET.getlist("category"))
+        queryset = Product.objects.filter(category__in=self.request.GET.getlist("category"))
         return queryset
-
-class ProductListView(generic.ListView, CategorySearch):
-    model = Product
 
 class Search(ListView):
     def get_queryset(self):
-        try:
-            return Product.objects.filter(name__icontains=self.request.GET.get("q"))
-        except:
-            return ('Ничего не найдено')
+        return Product.objects.filter(name__icontains=self.request.GET.get("q"))
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
         context["q"] = f'q={self.request.GET.get("q")}'
         return context
-
-
+class ProductListView(generic.ListView, CategorySearch):
+    model = Product
+def product_arm(request):
+    product = Product.objects.all()
+    return render(request, "mywork/product_arm.html", context={'product_list': product},)
 def update_product(request, pk):
     get_product = Product.objects.get(pk=pk)
     if request.method == 'POST':

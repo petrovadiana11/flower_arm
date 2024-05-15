@@ -1,0 +1,49 @@
+{% extends "mywork/base_arm.html" %}
+{% load static %}
+{% block title %}<title>Товары</title>{% endblock %}
+{% block namestr %} <h>Товары</h> {% endblock %}
+{% block content %}
+        <div id="cont" class="content">
+            <p>Чтобы найти товар, введите название товара  в поиск<br>
+                Для добавления товара - “Добавить товар”<br>
+                Для добавления категории - “Категория”<br>
+                </p>
+            <form method="get" action="{% url 'search' %}" >
+                <input name="q" type="text" placeholder="Поиск...">
+                <button id="but" type="submit">
+                    <img src="{% static 'img/icon.png' %}">
+                </button>
+            </form>
+            <div class="but">
+               <a href="{% url 'product_create' %}"><button id="buto" type="button" >Добавить товар</button></a>
+                <a href="{% url 'category_create' %}"><button id="buton" type="button" >Категория</button></a>
+            </div>
+
+        </div>
+{% if product_list %}
+        {% for product in product_list %}
+        <div class="product">
+            <div class="product_img">
+                <img src="{{ product.cover.url }}">
+            </div>
+            <div class="product_info">
+                <h>{{product.name}}</h>
+                <p> код товара:<b>{{product.kod_product}}</b><br>
+                    цена:<b> {{product.price}} руб.</b><br>
+                    количество:<b> {{product.count}}</b><br>
+                    дата выставки:<b> {{product.published}}</b><br>
+                </p>
+            </div>
+            <div class="product_edit">
+                <a href="{% url 'update_product' product.id %}"><button type="button">Изменить</button></a>
+                <a href="{% url 'delete_product' product.id %}"><button type="button">Удалить</button></a>
+            </div>
+        </div>
+        {% endfor %}
+{% else %}
+<div class="search">
+    <img src="{% static 'img/icon_search.png' %}">
+    <p>Ничего не найдено</p>
+    </div>
+{% endif %}
+{% endblock %}

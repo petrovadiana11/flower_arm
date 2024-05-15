@@ -18,7 +18,7 @@
                     Состав: <strong>10 красных роз</strong><br>
                     Вес: <strong>500 г.</strong><br>
                     Категория: <strong>{{product.category.name}}</strong></p>
-                    <button type="button">Добавить в корзину</button>
+                    <a href="{% url 'add-product' product.id%}"><button type="button">Добавить в корзину</button></a>
                     
                 </div>
               </div>
