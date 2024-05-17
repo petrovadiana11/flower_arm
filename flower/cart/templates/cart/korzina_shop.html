@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% load cart_tags %}
+{% user_carts request as cart %}
+
+{% if cart %}
+        <h4 class="korzina-text">Корзина</h4>
+    {% for cart in cart %}
+     <div class="korzina_user">
+        <div class="container text-center">
+            <div class="row align-items-start">
+              <div class="col-auto">
+                <img class="img-korzina mt-3" src="{{ cart.product.cover.url }}">
+              </div>
+              <div class="col mt-3">
+                <h5>Товар</h5>
+                <div class="p mt-5">{{cart.product.name}}</div>
+              </div>
+              <div class="col mt-3">
+                <h5>Количество</h5>
+                  <div class="input-group">
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-dark btn-sm decrement" data-cart-id="" data-cart-change-url="">-</button>
+                      </span>
+                      <input type="text" class="form-control number" value="{{cart.quantity}}" readonly>
+                      <span class="input-group-btn">
+                          <button type="button" class="btn btn-dark btn-sm increment" data-cart-id="" data-cart-change-url="">+</button>
+                      </span>
+                  </div>
+              </div>
+              <div class="col mt-3">
+                <h5>Цена</h5>
+                <div class="p mt-5">{{cart.product_price}} руб.</div>
+              </div>
+              <div class="col-2 mt-4">
+                <a href="{% url 'cart:cart_remove' cart.id %}"><div class="p-del mt-5">Удалить из корзины</div></a>
+              </div>
+            </div>
+          </div>
+     </div>
+{% endfor %}
+         <br><h5>Итого к оплате: {{cart.total_price}} рублей</h5>
+     <a href="{% url 'oformlenie_shop' %}"><button class="korzina-button mt-4" type="button">Перейти к оформлению</button></a>
+{% else %}
+    <div class="thanks-order text-center" >
+        <img src="{% static 'img/cart.png' %}">
+        <h5>Похоже, Вы ещё ничего не добавили в корзину</h5>
+        <a href="{% url 'product_list' %}"><h4>К покупкам</h4></a>
+      </div>
+{% endif %}
+  {% endblock %}

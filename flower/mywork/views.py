@@ -2,14 +2,17 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy, reverse
 from django.views import generic
-from .forms import ProductForm, CategoryForm, HelpForm, OrderForm
+from .forms import ProductForm, CategoryForm, HelpForm, OrderForm,CartAddProductForm
 from .models import Product, Order, Category
+from django.views.decorators.http import require_POST
 from django.views.generic import ListView
+from .cart import Cart
 from django.http import HttpResponseRedirect
+
 
 
 # Create your views here.
@@ -18,18 +21,20 @@ class ProductDetailView(generic.DetailView):
     category = Category.objects.all()
     model = Product
 
-def add_product(request, pk):
-    get_product = Product.objects.get(pk=pk)
-    template = "mywork/product_detail"
-    context = {
-        'get_product': get_product,
-    }
-    return render(request, template, context)
+def product_detail(request, id, slug):
+    product = get_object_or_404(Product,
+                                id=id,
+                                slug=slug,
+                                available=True)
+    cart_product_form = CartAddProductForm()
+    return render(request, 'shop/product/detail.html', {'product': product,
+                                                        'cart_product_form': cart_product_form})
 
 
 def korzina_shop(request):
     category = Category.objects.all()
-    return render(request, "mywork/korzina_shop.html", context={'category': category},)
+    return render(request, "cart/korzina_shop.html", context={'category': category},)
+
 
 def oformlenie_shop(request):
     category = Category.objects.all()

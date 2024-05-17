@@ -37,7 +37,7 @@
               <div class="card-body">
                 <p class="card-title">{{product.name}}</p>
                 <h5 class="card-text">{{product.price}} руб.</h5>
-                <a href="#" ><button class="btn-korzina mt-2" type="submit">В корзину</button></a>
+                <a href="{% url 'cart:cart_add' product.id %}" ><button class="btn-korzina mt-2" type="submit">В корзину</button></a>
               </div>
             </a>
             </div>

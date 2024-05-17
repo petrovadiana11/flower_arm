@@ -3,11 +3,13 @@
 {% block content %}
 {% if user.is_authenticated %}
         <h4 class="korzina-text">Корзина</h4>
+{% for product in cart %}
+            {% with product=item.product %}
      <div class="korzina_user">
         <div class="container text-center">
             <div class="row align-items-start">
               <div class="col-auto">
-                <img class="img-korzina mt-3" src="img/rose.jpg">
+                <img class="{{product.cover.url}}" src="img/rose.jpg">
               </div>
               <div class="col mt-3">
                 <h5>Товар</h5>
@@ -15,17 +17,19 @@
               </div>
               <div class="col mt-3">
                 <h5>Количество</h5>
-                <div class="p mt-5">1</div>
+                <div class="p mt-5">{{ item.quantity }}</div>
               </div>
               <div class="col mt-3">
                 <h5>Цена</h5>
                 <div class="p mt-5">{{product.price}}</div>
               </div>
               <div class="col-2 mt-4">
-                <div class="p-del mt-5">Удалить из корзины</div>
+                <a href="{% url 'cart:cart_remove' product.id%}"><div class="p-del mt-5">Удалить из корзины</div></a>
               </div>
             </div>
           </div>
+         {% endwith %}
+        {% endfor %}
      </div>
      <a href="{% url 'oformlenie_shop' %}"><button class="korzina-button mt-4" type="button">Перейти к оформлению</button></a>
 {% else %}
