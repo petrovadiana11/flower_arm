@@ -653,9 +653,13 @@ a.active {
 .col, .col-2{
     font-size: 19px;
 }
+.col-2 a{
+    text-decoration: none;
+}
 .korzina-text{
     color:#b641f9;
 }
+
 .korzina-button{
     width: 85%;
     height: 50px;

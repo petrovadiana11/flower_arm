@@ -1,20 +1,16 @@
-
-from django.contrib.auth.views import LogoutView
+import django
+from django.contrib.auth import logout
 from django.urls import path
-from .views import ProductListView, teh_pod, ProductCreate, CategoryCreate, password_reset_done, \
-    password_reset_email, \
-    password_reset_confirm, password_reset_complete, password_reset_form, RegisterUser, UserLoginView, HelpCreate, \
+from .views import ProductListView, teh_pod, ProductCreate, CategoryCreate, HelpCreate, \
     OrderListView, Search, OrderDetailView, update_product, delete_product, order_history, order_status, delete_order, \
     FilterProduct, main_arm, korzina_shop, oformlenie_shop, thanks_delivery, profil, o_nas, \
-    ProductDetailView, UserLogoutView, product_arm
+    ProductDetailView, product_arm
+
 
 urlpatterns = [
     path('', ProductListView.as_view(), name='product_list'),
     path(r'^product/(?P<pk>\d+)$', ProductDetailView.as_view(), name='product-detail'),
     path('korzina_shop/', korzina_shop, name='korzina_shop'),
-    # path(r'^$', cart_detail, name='cart_detail'),
-    # path(r'^add/(?P<pk>\d+)/$', cart_add, name='cart_add'),
-    # path(r'^remove/(?P<pk>\d+)/$', cart_remove, name='cart_remove'),
     path('oformlenie_shop/', oformlenie_shop, name='oformlenie_shop'),
     path('thanks_delivery/', thanks_delivery, name='thanks_delivery'),
     path('profil/', profil, name='profil'),
@@ -32,16 +28,10 @@ urlpatterns = [
     path('delete/product/<int:pk>/', delete_product, name='delete_product'),
     path(r'^product/create/$', ProductCreate.as_view(), name='product_create'),
     path('category/create/', CategoryCreate.as_view(), name='category_create'),
-    path('user/register/', RegisterUser.as_view(), name='user_register'),
     path('send/help/', HelpCreate.as_view(), name='send_help'),
     path('teh_pod/', teh_pod, name='teh_pod'),
-    path('password/reset/form/', password_reset_form, name='password_reset_form'),
-    path('password/reset/done/', password_reset_done, name='password_reset_done'),
-    path('password/reset/email/', password_reset_email, name='password_reset_email'),
-    path('password/reset/confirm/', password_reset_confirm, name='password_reset_confirm'),
-    path('password/reset/complete/', password_reset_complete, name='password_reset_complete'),
-    path('login/', UserLoginView.as_view(), name='login'),
-    path('logout/', UserLogoutView.as_view(), name='logout'),
+
+
 
 
 

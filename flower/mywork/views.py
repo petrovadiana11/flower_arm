@@ -1,4 +1,4 @@
-
+from django.contrib.auth import logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
@@ -6,11 +6,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy, reverse
 from django.views import generic
-from .forms import ProductForm, CategoryForm, HelpForm, OrderForm,CartAddProductForm
+from .forms import ProductForm, CategoryForm, HelpForm, OrderForm
 from .models import Product, Order, Category
 from django.views.decorators.http import require_POST
 from django.views.generic import ListView
-from .cart import Cart
 from django.http import HttpResponseRedirect
 
 
@@ -20,16 +19,6 @@ from django.http import HttpResponseRedirect
 class ProductDetailView(generic.DetailView):
     category = Category.objects.all()
     model = Product
-
-def product_detail(request, id, slug):
-    product = get_object_or_404(Product,
-                                id=id,
-                                slug=slug,
-                                available=True)
-    cart_product_form = CartAddProductForm()
-    return render(request, 'shop/product/detail.html', {'product': product,
-                                                        'cart_product_form': cart_product_form})
-
 
 def korzina_shop(request):
     category = Category.objects.all()
@@ -162,10 +151,7 @@ class ProductCreate(CreateView):
     form_class = ProductForm
     success_url = reverse_lazy('product')
 
-class RegisterUser(CreateView):
-    template_name = 'registration/registr.html'
-    form_class = UserCreationForm
-    success_url = reverse_lazy('login')
+
 
 class HelpCreate(CreateView):
     template_name = 'mywork/send_help.html'
@@ -177,24 +163,7 @@ def teh_pod(request):
     return render(request, "mywork/tehnical.html")
 
 
-class UserLoginView(LoginView):
-    template_name = 'registration/login.html'
 
-class UserLogoutView(LogoutView):
-    template_name = 'registration/logout.html'
+def logout_user(request):
+    return redirect(request.META['HTTP_REFERER'])
 
-
-def password_reset_form(request):
-    return render(request, 'registration/password_reset_form.html')
-
-def password_reset_done(request):
-    return render(request, 'registration/password_reset_done.html')
-
-def password_reset_email(request):
-    return render(request, 'registration/password_reset_email.html')
-
-def password_reset_confirm(request):
-    return render(request, 'registration/password_reset_confirm.html')
-
-def password_reset_complete(request):
-    return render(request, 'registration/password_reset_complete.html')

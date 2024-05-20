@@ -40,6 +40,8 @@ class Product(models.Model):
                               verbose_name="Изображение")
     info = models.TextField(max_length=1000,
                            verbose_name="Информация о товаре")
+    structure = models.CharField(max_length=50, verbose_name="Состав букета")
+    massa = models.CharField(max_length=50, verbose_name="Вес")
     published = models.DateTimeField(auto_now_add=True, db_index=True,
                                      verbose_name="Дата выставки")
 
@@ -62,6 +64,7 @@ def func():
     nm1 = nm1 + 1
     nn = '000' + str(nm1)
     return nn
+
 
 class Order(models.Model):
     shop_code = models.CharField(max_length=20, unique=True, default=func, verbose_name='Номер заявки')

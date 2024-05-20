@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'mywork',
     'cart',
+    'users',
     'django.contrib.admin',
     'django.contrib.auth',
     'active_link',
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'flower.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'arm',
+        'NAME': 'shop',
         'USER': 'postgres',
         'PASSWORD': '123',
         'HOST': 'localhost',
@@ -132,7 +133,8 @@ MEDIA_ROOT = BASE_DIR / 'mywork/media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'product_list'
-LOGOUT_REDIRECT_URL = 'product_list'
+LOGOUT_REDIRECT_URL = '/product_list/'
+
 
 
 CART_SESSION_ID = 'cart'
