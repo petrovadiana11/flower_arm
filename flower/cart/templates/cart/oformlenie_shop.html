@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<h4 class="korzina-text" xmlns="http://www.w3.org/1999/html">Оформление доставки</h4>
+     <div class="oformlenie_user">
+        <div class="container text-start">
+            <div class="row align-items-start">
+
+                    <div class="col">
+                        <form method="post">
+                        <h5>Получатель</h5>
+                        {% csrf_token %}
+                        {{ form.name }}<br>
+                        {{ form.number }}<br>
+                        {{ form.message }}<br>
+                </form>
+                    </div>
+                    <div class="col ">
+                        <h5>Доставка</h5>
+
+
+                        {{ form.date_of_receipt }}
+                        {{form.adres}}
+                        <div class="delevery">
+                            <p>Стоимость доставки: 300 руб.</p>
+                            <p>Стоимость сборки: 200 руб.</p>
+                            <p>Итого к оплате: 1 700 руб.</p>
+                            <button class="btn_cart">Добавить карту</button>
+                        </div>
+                        <a href="{% url 'thanks_delivery' %}"><button class="delevery-btn mt-3" type="submit">Оформить заказ</button></a>
+                        </form>
+                    </div>
+
+          </div>
+        </div>
+       </div>
+     
+{% endblock %}

@@ -55,42 +55,9 @@ class Product(models.Model):
         verbose_name_plural = "Товары"
 
 
-def func():
-    nm = Product.objects.all()
-    nm1 = 1
-    for i1 in nm:
-        if i1.id > nm1:
-            nm1 = i1.id
-    nm1 = nm1 + 1
-    nn = '000' + str(nm1)
-    return nn
 
 
-class Order(models.Model):
-    shop_code = models.CharField(max_length=20, unique=True, default=func, verbose_name='Номер заявки')
-    name = models.CharField(max_length=100, help_text="Введите имя и фамилию получателя",
-                            verbose_name="Имя и фамилия получателя")
-    adres = models.CharField(max_length=200, help_text="Введите адрес доставки",
-                            verbose_name="Адрес", blank=True)
-    number = models.CharField(help_text="Введите номер телефона получателя",
-                            verbose_name="Номер телефона получателя")
-    product = models.ForeignKey('Product', on_delete=models.CASCADE,
-                                help_text="Товар", verbose_name="Товар")
-    published = models.DateTimeField(auto_now_add=True, db_index=True, null=True,
-                                     verbose_name="Дата заказа")
-    date_of_receipt = models.DateTimeField(verbose_name="Дата и время получения")
-    message = models.CharField(max_length=200, blank=True, help_text="Введите дополнительную информацию",
-                            verbose_name="Дополнительная информация")
-    active = models.BooleanField(default=False, verbose_name="")
 
-    def __str__(self):
-        return self.name
-
-    def get_absolute_path(self):
-        return reverse('order-detail', args=[str(self.id)])
-
-    class Meta:
-        verbose_name_plural = "Заказы"
 
 
 

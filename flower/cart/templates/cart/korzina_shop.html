@@ -41,7 +41,7 @@
      </div>
 {% endfor %}
          <br><h5>Итого к оплате: {{cart.total_price}} рублей</h5>
-     <a href="{% url 'oformlenie_shop' %}"><button class="korzina-button mt-4" type="button">Перейти к оформлению</button></a>
+     <a href="{% url 'cart:order-create' %}"><button class="korzina-button mt-4" type="submit">Перейти к оформлению</button></a>
 {% else %}
     <div class="thanks-order text-center" >
         <img src="{% static 'img/cart.png' %}">

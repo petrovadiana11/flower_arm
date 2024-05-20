@@ -6,8 +6,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.edit import CreateView, UpdateView
 from django.urls import reverse_lazy, reverse
 from django.views import generic
-from .forms import ProductForm, CategoryForm, HelpForm, OrderForm
-from .models import Product, Order, Category
+from .forms import ProductForm, CategoryForm, HelpForm
+from .models import Product, Category
 from django.views.decorators.http import require_POST
 from django.views.generic import ListView
 from django.http import HttpResponseRedirect
@@ -106,40 +106,6 @@ def delete_product(request, pk):
     get_product.delete()
     return redirect(reverse('product'))
 
-class OrderListView(generic.ListView):
-    model = Order
-
-    def get(self, request):
-        order_list = Order.objects.filter(active="False")
-        return render(request, 'mywork/order_list.html', {'order_list': order_list})
-
-def order_history(request):
-    order_list = Order.objects.filter(active="True")
-    return render(request, 'mywork/order_list.html', {'order_list': order_list})
-
-def order_status(request, pk):
-    get_order = Order.objects.get(pk=pk)
-    if request.method == 'POST':
-        form = OrderForm(request.POST, instance=get_order)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse('order'))
-
-    template = 'mywork/edit.html'
-    context = {
-        'get_order': get_order,
-        'update': True,
-        'form': OrderForm(instance=get_order)
-    }
-    return render(request, template, context)
-
-def delete_order(request, pk):
-    get_order = Order.objects.get(pk=pk)
-    get_order.delete()
-    return redirect(reverse('order'))
-
-class OrderDetailView(generic.DetailView):
-    model = Order
 
 class CategoryCreate(CreateView):
     template_name = 'mywork/add_category.html'

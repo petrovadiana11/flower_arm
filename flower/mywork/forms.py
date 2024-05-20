@@ -2,7 +2,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from .models import Product, Category, Help, Order
+from .models import Product, Category, Help
 from django import forms
 
 
@@ -19,10 +19,6 @@ class CategoryForm(ModelForm):
         model = Category
         fields = ('name',)
 
-class OrderForm(ModelForm):
-    class Meta:
-        model = Order
-        fields = ('active',)
 
 class HelpForm(ModelForm):
     class Meta:
